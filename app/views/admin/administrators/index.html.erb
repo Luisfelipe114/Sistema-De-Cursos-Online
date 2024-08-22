@@ -1,0 +1,39 @@
+<div class="container-fluid">
+  <h1>Administradores</h1>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>Cpf</th>
+        <th>Telefone</th>
+        <th>Email</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @admin_administrators.each do |admin_administrator| %>
+        <tr>
+            <td>
+              <%= admin_administrator.nome %>
+            </td>      
+            <td>
+              <%= admin_administrator.cpf %>
+            </td>      
+            <td>
+              <%= admin_administrator.telefone %>
+            </td>      
+            <td>
+              <%= admin_administrator.email %>
+            </td>      
+            <td>
+              <%= link_to 'Mostrar', admin_administrator, class:"btn btn-light min-width-btn" %>
+              <%= link_to 'Editar', edit_admin_administrator_path(admin_administrator),class:"btn btn-primary min-width-btn"  %>     
+              <%= link_to 'Deletar', admin_administrator, data: { turbo_method: :delete, turbo_confirm: 'Tem certeza?' }, class: "btn btn-danger min-width-btn" %>
+            </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <br>
+  <%= link_to 'Novo Admin Administrator', new_admin_administrator_path,class:"btn btn-success min-width-btn" %>
+</div>
