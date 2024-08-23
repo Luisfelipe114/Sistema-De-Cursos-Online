@@ -1,0 +1,47 @@
+<div class="container-fluid">
+  <h1>Sales Addresses</h1>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Rua</th>
+        <th>Numero</th>
+        <th>Bairro</th>
+        <th>Cep</th>
+        <th>Estado</th>
+        <th>Vendedor</th>
+      <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @addresses.each do |sales_address| %>
+        <tr>
+            <td>
+              <%= sales_address.rua %>
+            </td>      
+            <td>
+              <%= sales_address.numero %>
+            </td>      
+            <td>
+              <%= sales_address.bairro %>
+            </td>      
+            <td>
+              <%= sales_address.cep %>
+            </td>        
+            <td>
+              <%= sales_address.estado %>
+            </td>      
+            <td>
+              <%= sales_bank_account.sales_sellers.nome %>
+            </td>   
+          <td>
+            <%= link_to 'Mostrar', sales_seller_address_path(@seller, id: sales_address.id), class:"btn btn-light min-width-btn" %>
+            <%= link_to 'Editar', edit_sales_seller_address_path(@seller, id: sales_address.id),class:"btn btn-primary min-width-btn"  %>     
+            <%= link_to 'Deletar', sales_seller_address_path(@seller, id: sales_address.id), data: { turbo_method: :delete, turbo_confirm: 'Tem certeza?' }, class: "btn btn-danger min-width-btn" %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <br>
+  <%= link_to 'Novo Sales Address', new_sales_seller_address_path(@seller),class:"btn btn-success min-width-btn" %>
+</div>

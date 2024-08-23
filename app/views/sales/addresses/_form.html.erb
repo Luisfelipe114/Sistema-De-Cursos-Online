@@ -1,0 +1,35 @@
+<%= form_with(model: @address, local: true, url: @address.new_record? ? sales_seller_addresses_path(@seller) : sales_seller_address_path(@seller, @address)) do |form| %>
+  <% if @address.errors.any? %>
+    <div id="error_explanation" class="alert alert-danger" role="alert">
+      <h5><%= pluralize(@address.errors.count, "error") %> prohibited this address from being saved:</h5>
+      <ul>
+      <% @address.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+            <div class="form-group">
+        <%= form.label :rua %>
+        <%= form.text_field :rua, id: :rua ,class:"form-control"%>
+      </div>
+                <div class="form-group">
+        <%= form.label :numero %>
+        <%= form.text_field :numero, id: :numero ,class:"form-control"%>
+      </div>
+                <div class="form-group">
+        <%= form.label :bairro %>
+        <%= form.text_field :bairro, id: :bairro ,class:"form-control"%>
+      </div>
+                <div class="form-group">
+        <%= form.label :cep %>
+        <%= form.text_field :cep, id: :cep ,class:"form-control"%>
+      </div>
+                <div class="form-group">
+        <%= form.label :estado %>
+        <%= form.text_field :estado, id: :estado ,class:"form-control"%>
+      </div>
+        <div class="actions">
+    <%= form.submit "Salvar", class:"btn btn-success min-width-btn" %>
+  </div>
+<% end %>

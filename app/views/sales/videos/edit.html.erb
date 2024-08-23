@@ -1,0 +1,7 @@
+<div class="container">
+    <h1>Editing Sales Video</h1>
+    <%= render 'form', sales_video: @sales_video %>
+    <br>
+    <%= link_to 'Mostrar', sales_course_video_path(@course, @video), class:"btn btn-light min-width-btn" %>
+    <%= link_to 'Voltar', sales_course_videos_path(@course), class:"btn btn-light min-width-btn" %>
+</div>

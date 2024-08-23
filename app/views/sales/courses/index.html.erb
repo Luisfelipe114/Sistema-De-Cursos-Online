@@ -1,0 +1,39 @@
+<div class="container-fluid">
+  <h1>Sales Courses</h1>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>Descricao</th>
+        <th>Link</th>
+        <th>Videos</th>
+      <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @courses.each do |sales_course| %>
+        <tr>
+            <td>
+              <%= sales_course.nome %>
+            </td>      
+            <td>
+              <%= sales_course.descricao %>
+            </td>      
+            <td>
+              <%= sales_course.link %>
+            </td>      
+            <td>
+              <%= link_to 'Acessar', sales_course_videos_path(course_id: sales_course.id) %>
+            </td>  
+          <td>
+            <%= link_to 'Mostrar', sales_course, class:"btn btn-light min-width-btn" %>
+            <%= link_to 'Editar', edit_sales_course_path(sales_course),class:"btn btn-primary min-width-btn"  %>     
+            <%= link_to 'Deletar', sales_course_path(id: sales_course.id), data: { turbo_method: :delete, turbo_confirm: 'Tem certeza?' }, class: "btn btn-danger min-width-btn" %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <br>
+  <%= link_to 'Novo Sales Course', new_sales_course_path,class:"btn btn-success min-width-btn" %>
+</div>

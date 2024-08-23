@@ -1,0 +1,35 @@
+<div class="container-fluid">
+  <h1>Sales Videos</h1>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>Descricao</th>
+        <th>Link</th>
+      <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @videos.each do |sales_video| %>
+        <tr>
+            <td>
+              <%= sales_video.nome %>
+            </td>      
+            <td>
+              <%= sales_video.descricao %>
+            </td>      
+            <td>
+              <%= sales_video.link %>
+            </td>      
+          <td>
+            <%= link_to 'Mostrar', sales_course_video_path(@course, id: sales_video.id), class:"btn btn-light min-width-btn" %>
+            <%= link_to 'Editar', edit_sales_course_video_path(@course, id: sales_video.id), class:"btn btn-primary min-width-btn"  %>     
+           <%= link_to 'Deletar', sales_course_video_path(@course, id: sales_video.id), data: { turbo_method: :delete, turbo_confirm: 'Tem certeza?' }, class: "btn btn-danger min-width-btn" %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <br>
+  <%= link_to 'Novo Sales Video', new_sales_course_video_path(@course),class:"btn btn-success min-width-btn" %>
+</div>

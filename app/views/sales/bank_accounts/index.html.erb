@@ -1,0 +1,39 @@
+<div class="container-fluid">
+  <h1>Sales Bank Accounts</h1>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Numero</th>
+        <th>Agencia</th>
+        <th>Banco</th>
+        <th>Vendedor</th>
+      <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @bank_accounts.each do |sales_bank_account| %>
+        <tr>
+            <td>
+              <%= sales_bank_account.numero %>
+            </td>      
+            <td>
+              <%= sales_bank_account.agencia %>
+            </td>      
+            <td>
+              <%= sales_bank_account.banco %>
+            </td>      
+            <td>
+              <%= sales_bank_account.sales_sellers.nome %>
+            </td>      
+          <td>
+            <%= link_to 'Mostrar', sales_seller_bank_account_path(@seller, id: sales_bank_account.id), class:"btn btn-light min-width-btn" %>
+            <%= link_to 'Editar', edit_sales_seller_bank_account_path(@seller, id: sales_bank_account.id),class:"btn btn-primary min-width-btn"  %>     
+            <%= link_to 'Deletar', sales_seller_bank_account_path(@seller, id: sales_bank_account.id), data: { turbo_method: :delete, turbo_confirm: 'Tem certeza?' }, class: "btn btn-danger min-width-btn" %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <br>
+  <%= link_to 'Novo Sales Bank Account',new_sales_seller_bank_account_path(@seller),class:"btn btn-success min-width-btn" %>
+</div>

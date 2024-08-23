@@ -1,0 +1,42 @@
+<div class="container-fluid">
+  <h1>Sales Sellers</h1>
+  <table class="table">
+    <thead>
+      <tr>
+                  <th>Nome</th>
+                  <th>Cpf</th>
+                  <th>Telefone</th>
+                  <th>Email</th>
+                  <th>Cursos</th>
+                <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @sellers.each do |sales_seller| %>
+        <tr>
+            <td>
+              <%= sales_seller.nome %>
+            </td>      
+            <td>
+              <%= sales_seller.cpf %>
+            </td>      
+            <td>
+              <%= sales_seller.telefone %>
+            </td>      
+            <td>
+              <%= sales_seller.email %>
+            </td>      
+            <td></td>
+                    
+          <td>
+            <%= link_to 'Mostrar', sales_seller, class:"btn btn-light min-width-btn" %>
+            <%= link_to 'Editar', edit_sales_seller_path(sales_seller),class:"btn btn-primary min-width-btn"  %>     
+            <%= link_to 'Deletar', sales_seller_path(id: sales_seller.id), data: { turbo_method: :delete, turbo_confirm: 'Tem certeza?' }, class: "btn btn-danger min-width-btn" %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <br>
+  <%= link_to 'Novo Sales Seller', new_sales_seller_path,class:"btn btn-success min-width-btn" %>
+</div>

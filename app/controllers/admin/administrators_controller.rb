@@ -1,5 +1,4 @@
-class Admin::AdministratorsController < ApplicationController
-  layout "admin"
+class Admin::AdministratorsController < Admin::ApplicationController
   before_action :set_admin_administrator, :set_admin_address, only: %i[ show edit update destroy ]
 
 

@@ -1,9 +1,18 @@
 Rails.application.routes.draw do
-  namespace :admin do
-    resources :administrators do
+  namespace :sales do
+    root to: 'home#index'
+    get 'home/index'
+    resources :sellers do
       resources :addresses
       resources :bank_accounts
     end
+    resources :courses do
+      resources :videos
+    end
+  end
+
+  namespace :admin do
+    resources :administrators
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -13,4 +22,4 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
-end
+end 

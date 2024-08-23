@@ -1,0 +1,7 @@
+<div class="container">
+    <h1>Editing Sales Bank Account</h1>
+    <%= render 'form', sales_bank_account: @sales_bank_account %>
+    <br>
+    <%= link_to 'Mostrar', sales_seller_bank_account_path(@seller, @bank_account), class:"btn btn-light min-width-btn" %>
+    <%= link_to 'Voltar', sales_seller_bank_accounts_path(@seller), class:"btn btn-light min-width-btn" %>
+</div>
