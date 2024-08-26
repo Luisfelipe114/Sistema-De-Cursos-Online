@@ -1,0 +1,19 @@
+<%= form_with(model: admin_category, local: true) do |form| %>
+  <% if admin_category.errors.any? %>
+    <div id="error_explanation" class="alert alert-danger" role="alert">
+      <h5><%= pluralize(admin_category.errors.count, "error") %> prohibited this admin_category from being saved:</h5>
+      <ul>
+      <% admin_category.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+            <div class="form-group">
+        <%= form.label :nome %>
+        <%= form.text_field :nome, id: :nome ,class:"form-control"%>
+      </div>
+        <div class="actions">
+    <%= form.submit "Salvar", class:"btn btn-success min-width-btn" %>
+  </div>
+<% end %>

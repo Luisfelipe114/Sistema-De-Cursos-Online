@@ -1,0 +1,11 @@
+<div class="container">
+  <h1>Admin Category Details</h1>
+  <%= form_with(model: @admin_category, local: true) do |form| %>
+                  <div class="form-group">
+          <%= form.label :nome %>
+          <%= form.text_field :nome, id: :nome ,class:"form-control", readonly:true%>
+        </div>
+            <% end %>
+  <%= link_to 'Editar', edit_admin_category_path(@admin_category),class:"btn btn-primary min-width-btn" %> 
+  <%= link_to 'Voltar', admin_categories_path,class:"btn btn-light min-width-btn" %>
+</div>

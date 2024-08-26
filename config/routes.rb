@@ -17,6 +17,12 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
+    get '/login', to: 'login#index'
+   # get '/signup', to: 'login#signup'
+    post '/login/confirm', to: 'login#confirm_login', as: 'confirm_login'
+   # post '/signup/new-signup', to: 'login#create', as: 'new_signup'
+    get '/logout', to: 'login#logout', as: 'logout'
+    resources :categories
     resources :administrators
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

@@ -1,0 +1,16 @@
+<div class="page-header">
+    <form class="form-signin" method="post" action="<%= sales_confirm_login_path %>">
+        <%= hidden_field_tag :authenticity_token, form_authenticity_token %> <!--Adicionando o token de autenticidade a um formulário html puro-->
+        <h1 class="h3 mb-3 font-weight-normal">Entrar</h1>
+        <label for="email" class="sr-only">Email</label>
+        <input type="email" id="email" name="email" class="form-control" placeholder="Email address" required=true autofocus="">
+        <label for="password" class="sr-only">Senha</label>
+        <input type="password" id="password" name="password" class="form-control" placeholder="Senha" required=true>  <!--name é o que é passado no post-->
+        <button class="btn btn-lg btn-primary btn-block mt-3" style="width: 100%;" type="submit">Login</button>
+         <div style="margin-top: 8px">
+            <span>Não possui um login? Cadastre-se </span>
+            <%= link_to 'aqui', sales_signup_path, style:"text-decoration: none; color: blue;"%>
+        </div>
+        <small class="mt-5 mb-3 text-muted">©2021 - <%= Time.now.year %></small>
+    </form>
+</div>

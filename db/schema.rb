@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_08_26_133348) do
+ActiveRecord::Schema[7.1].define(version: 2024_08_26_152524) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -19,7 +19,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_26_133348) do
     t.string "cpf"
     t.string "telefone"
     t.string "email"
-    t.string "senha"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "password_digest"
+  end
+
+  create_table "admin_categories", force: :cascade do |t|
+    t.string "nome"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -53,6 +59,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_26_133348) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "sales_sellers_id", null: false
+    t.bigint "admin_categories_id", null: false
+    t.index ["admin_categories_id"], name: "index_sales_courses_on_admin_categories_id"
     t.index ["sales_sellers_id"], name: "index_sales_courses_on_sales_sellers_id"
   end
 
@@ -78,6 +86,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_26_133348) do
 
   add_foreign_key "sales_addresses", "sales_sellers", column: "sales_sellers_id"
   add_foreign_key "sales_bank_accounts", "sales_sellers", column: "sales_sellers_id"
+  add_foreign_key "sales_courses", "admin_categories", column: "admin_categories_id"
   add_foreign_key "sales_courses", "sales_sellers", column: "sales_sellers_id"
   add_foreign_key "sales_videos", "sales_courses", column: "sales_courses_id"
 end
