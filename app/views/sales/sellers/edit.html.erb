@@ -2,6 +2,9 @@
     <h1>Editing Sales Seller</h1>
     <%= render 'form', sales_seller: @sales_seller %>
     <br>
-    <%= link_to 'Mostrar', @sales_seller, class:"btn btn-light min-width-btn" %>
-    <%= link_to 'Voltar', sales_sellers_path, class:"btn btn-light min-width-btn" %>
+    <div class="mt-3">
+        <%= link_to 'Mostrar', sales_seller_path(@seller), class:"btn btn-light min-width-btn" %>
+        <%= link_to 'Endereço', sales_seller_addresses_path(@seller), class: "btn btn-success min-width-btn" %>
+        <%= link_to 'Conta Bancária', sales_seller_bank_accounts_path(@seller), class: "btn btn-success min-width-btn" %>
+    </div>
 </div>

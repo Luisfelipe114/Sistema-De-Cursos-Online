@@ -3,7 +3,7 @@ class Sales::CoursesController < Sales::ApplicationController
 
   # GET /sales/courses or /sales/courses.json
   def index
-    @courses = Sales::Course.all
+    @courses =  @seller.sales_courses
   end
 
   # GET /sales/courses/1 or /sales/courses/1.json
@@ -25,7 +25,7 @@ class Sales::CoursesController < Sales::ApplicationController
 
     respond_to do |format|
       if @course.save
-        format.html { redirect_to sales_courses_path, notice: "Course was successfully created." }
+        format.html { redirect_to sales_seller_courses_path(@seller), notice: "Course was successfully created." }
         format.json { render :show, status: :created, location: @course }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -38,7 +38,7 @@ class Sales::CoursesController < Sales::ApplicationController
   def update
     respond_to do |format|
       if @course.update(course_params)
-        format.html { redirect_to sales_courses_path, notice: "Course was successfully updated." }
+        format.html { redirect_to sales_seller_courses_path(@seller), notice: "Course was successfully updated." }
         format.json { render :show, status: :ok, location: @course }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -52,7 +52,7 @@ class Sales::CoursesController < Sales::ApplicationController
     @course.destroy!
 
     respond_to do |format|
-      format.html { redirect_to sales_courses_path, notice: "Course was successfully destroyed." }
+      format.html { redirect_to sales_seller_course_path(@seller), notice: "Course was successfully destroyed." }
       format.json { head :no_content }
     end
   end
@@ -65,6 +65,7 @@ class Sales::CoursesController < Sales::ApplicationController
 
     # Only allow a list of trusted parameters through.
     def course_params
-      params.require(:sales_course).permit(:nome, :descricao, :link)
+      params[:sales_course][:sales_sellers_id] = params[:seller_id]
+      params.require(:sales_course).permit(:nome, :descricao, :link, :sales_sellers_id)
     end
 end

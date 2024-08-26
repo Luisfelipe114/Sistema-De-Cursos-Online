@@ -1,13 +1,18 @@
 Rails.application.routes.draw do
   namespace :sales do
     root to: 'home#index'
+    get '/login', to: 'login#index'
+    get '/signup', to: 'login#signup'
+    post '/login/confirm', to: 'login#confirm_login', as: 'confirm_login'
+    post '/signup/new-signup', to: 'login#create', as: 'new_signup'
+    get '/logout', to: 'login#logout', as: 'logout'
     get 'home/index'
-    resources :sellers do
+    resources :sellers, except: [:index, :new] do
       resources :addresses
       resources :bank_accounts
-    end
-    resources :courses do
-      resources :videos
+      resources :courses do
+        resources :videos
+      end
     end
   end
 

@@ -23,17 +23,17 @@
               <%= sales_course.link %>
             </td>      
             <td>
-              <%= link_to 'Acessar', sales_course_videos_path(course_id: sales_course.id) %>
+              <%= link_to 'Acessar', sales_seller_course_videos_path(@seller, course_id: sales_course.id) %>
             </td>  
           <td>
-            <%= link_to 'Mostrar', sales_course, class:"btn btn-light min-width-btn" %>
-            <%= link_to 'Editar', edit_sales_course_path(sales_course),class:"btn btn-primary min-width-btn"  %>     
-            <%= link_to 'Deletar', sales_course_path(id: sales_course.id), data: { turbo_method: :delete, turbo_confirm: 'Tem certeza?' }, class: "btn btn-danger min-width-btn" %>
+            <%= link_to 'Mostrar', sales_seller_course_path(@seller, id: sales_course.id), class:"btn btn-light min-width-btn" %>
+            <%= link_to 'Editar', edit_sales_seller_course_path(@seller, id: sales_course.id),class:"btn btn-primary min-width-btn"  %>     
+            <%= link_to 'Deletar', sales_seller_course_path(@seller, id: sales_course.id), data: { turbo_method: :delete, turbo_confirm: 'Tem certeza?' }, class: "btn btn-danger min-width-btn" %>
           </td>
         </tr>
       <% end %>
     </tbody>
   </table>
   <br>
-  <%= link_to 'Novo Sales Course', new_sales_course_path,class:"btn btn-success min-width-btn" %>
+  <%= link_to 'Novo Curso', new_sales_seller_course_path(@seller),class:"btn btn-success min-width-btn" %>
 </div>

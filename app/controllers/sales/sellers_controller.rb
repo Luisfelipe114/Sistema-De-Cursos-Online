@@ -65,6 +65,6 @@ class Sales::SellersController < Sales::ApplicationController
 
     # Only allow a list of trusted parameters through.
     def seller_params
-      params.require(:sales_seller).permit(:nome, :cpf, :telefone, :email, :password_digest)
+      params.require(:sales_seller).permit(:nome, :cpf, :telefone, :email)
     end
 end

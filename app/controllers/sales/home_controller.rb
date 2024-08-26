@@ -1,4 +1,5 @@
-class Sales::HomeController < ApplicationController
+class Sales::HomeController < Sales::ApplicationController
+  layout 'sales'
   def index
   end
 end

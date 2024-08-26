@@ -1,6 +1,6 @@
 <div class="container">
   <h1>Sales Bank Account Details</h1>
-  <%= form_with(model: @sales_bank_account, local: true, url: sales_seller_bank_account_path(@seller, @bank_account)) do |form| %>
+  <%= form_with(model: @bank_account, local: true, url: sales_seller_bank_account_path(@seller, @bank_account)) do |form| %>
         <div class="form-group">
           <%= form.label :numero %>
           <%= form.number_field :numero, id: :numero ,class:"form-control", readonly:true%>

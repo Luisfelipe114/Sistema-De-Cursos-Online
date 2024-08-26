@@ -24,24 +24,7 @@
             <li class="nav-item">
               <%= link_to 'Home', sales_root_path, class: 'nav-link active' %>
             </li>
-            <li class="nav-item">
-              <%= link_to 'Perfil', edit_sales_seller_path(@seller), class: 'nav-link active' %>
-            </li>
-            <li class="nav-item">
-              <%= link_to 'Cursos', sales_seller_courses_path(@seller), class: 'nav-link active' %>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="dropdown05" data-bs-toggle="dropdown" aria-expanded="false">Dropdown</a>
-              <ul class="dropdown-menu" aria-labelledby="dropdown05">
-                <li><a class="dropdown-item" href="#">Cursos</a></li>
-                <li><a class="dropdown-item" href="#">Administistradores</a></li>
-                <li><a class="dropdown-item" href="#">Something else here</a></li>
-              </ul>
-            </li>
           </ul>
-          <div class="text-light">
-            <%= link_to 'Sair', sales_logout_path, class: 'nav-link active' %>
-          </div>
         </div>
       </div>
     </nav>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_08_23_134956) do
+ActiveRecord::Schema[7.1].define(version: 2024_08_26_133348) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -52,6 +52,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_23_134956) do
     t.string "link"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "sales_sellers_id", null: false
+    t.index ["sales_sellers_id"], name: "index_sales_courses_on_sales_sellers_id"
   end
 
   create_table "sales_sellers", force: :cascade do |t|
@@ -76,5 +78,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_23_134956) do
 
   add_foreign_key "sales_addresses", "sales_sellers", column: "sales_sellers_id"
   add_foreign_key "sales_bank_accounts", "sales_sellers", column: "sales_sellers_id"
+  add_foreign_key "sales_courses", "sales_sellers", column: "sales_sellers_id"
   add_foreign_key "sales_videos", "sales_courses", column: "sales_courses_id"
 end

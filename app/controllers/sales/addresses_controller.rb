@@ -1,6 +1,5 @@
 class Sales::AddressesController < Sales::ApplicationController
   before_action :set_address, only: %i[ show edit update destroy ]
-  before_action :set_seller
 
   # GET /sales/addresses or /sales/addresses.json
   def index
@@ -63,11 +62,7 @@ class Sales::AddressesController < Sales::ApplicationController
     def set_address
       @address = Sales::Address.find(params[:id])
     end
-
-    def set_seller
-      @seller = Sales::Seller.find(params[:seller_id])
-    end
-
+    
     # Only allow a list of trusted parameters through.
     def address_params
       params[:sales_address][:sales_sellers_id] = params[:seller_id]

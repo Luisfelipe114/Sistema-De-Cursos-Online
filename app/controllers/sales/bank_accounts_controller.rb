@@ -1,6 +1,5 @@
 class Sales::BankAccountsController < Sales::ApplicationController
   before_action :set_bank_account, only: %i[ show edit update destroy ]
-  before_action :set_seller
 
   # GET /sales/bank_accounts or /sales/bank_accounts.json
   def index
@@ -62,10 +61,6 @@ class Sales::BankAccountsController < Sales::ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_bank_account
       @bank_account = Sales::BankAccount.find(params[:id])
-    end
-
-    def set_seller
-      @seller = Sales::Seller.find(params[:seller_id])
     end
 
     # Only allow a list of trusted parameters through.

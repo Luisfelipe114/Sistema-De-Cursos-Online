@@ -21,10 +21,6 @@
           <%= form.label :estado %>
           <%= form.text_field :estado, id: :estado ,class:"form-control", readonly:true%>
         </div>
-        <div class="form-group">
-          <%= form.label :sales_sellers_id %>
-          <%= form.text_field :sales_sellers_id, id: :sales_sellers_id ,class:"form-control", readonly:true%>
-        </div>
       <% end %>
   <%= link_to 'Editar', edit_sales_seller_address_path(@seller, @address),class:"btn btn-primary min-width-btn" %> 
   <%= link_to 'Voltar', sales_seller_addresses_path(@seller),class:"btn btn-light min-width-btn" %>
