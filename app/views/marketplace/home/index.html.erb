@@ -1,0 +1,33 @@
+<div class="container-fluid">
+  <h1>Sales Courses</h1>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>Descricao</th>
+        <th>Categoria</th>
+        <th>Link</th>
+      <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @courses.each do |sales_course| %>
+        <tr>
+            <td>
+              <%= sales_course.nome %>
+            </td>      
+            <td>
+              <%= sales_course.descricao %>
+            </td>    
+             <td>
+              <%= sales_course.admin_categories.nome %>
+            </td>   
+            <td>
+              <%= sales_course.link %>
+            </td>      
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <br>
+</div>

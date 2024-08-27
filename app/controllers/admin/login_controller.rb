@@ -8,10 +8,10 @@ class Admin::LoginController < Admin::ApplicationController
     administrator = Admin::Administrator.find_by(email: params[:email])
     if administrator.present? && administrator.authenticate(params[:password])
       session[:administrator] = administrator.id
-      redirect_to sales_root_path, notice: "Successfully logged in"
+      redirect_to admin_root_path, notice: "Successfully logged in"
     else
       flash[:error] = 'Invalid email or password'
-      redirect_to sales_login_path
+      redirect_to admin_login_path
     end
   end
 

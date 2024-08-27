@@ -1,4 +1,20 @@
 Rails.application.routes.draw do
+  root to: 'home#index'
+
+  namespace :marketplace do
+    root to: 'home#index'
+  end
+
+  namespace :client do
+    resources :users
+    get '/login', to: 'login#index'
+    get '/signup', to: 'login#signup'
+    post '/login/confirm', to: 'login#confirm_login', as: 'confirm_login'
+    post '/signup/new-signup', to: 'login#create', as: 'new_signup'
+    get '/logout', to: 'login#logout', as: 'logout'
+    root to: 'home#index'
+  end
+
   namespace :sales do
     root to: 'home#index'
     get '/login', to: 'login#index'
@@ -24,6 +40,7 @@ Rails.application.routes.draw do
     get '/logout', to: 'login#logout', as: 'logout'
     resources :categories
     resources :administrators
+    root to: 'administrators#index'
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

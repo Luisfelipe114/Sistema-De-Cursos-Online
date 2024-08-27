@@ -1,0 +1,43 @@
+<div class="container-fluid">
+  <h1>Client Users</h1>
+  <table class="table">
+    <thead>
+      <tr>
+                  <th>Nome</th>
+                  <th>Telefone</th>
+                  <th>Cpf</th>
+                  <th>Email</th>
+                  <th>Password digest</th>
+                <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @client_users.each do |client_user| %>
+        <tr>
+                      <td>
+              <%= client_user.nome %>
+            </td>      
+                      <td>
+              <%= client_user.telefone %>
+            </td>      
+                      <td>
+              <%= client_user.cpf %>
+            </td>      
+                      <td>
+              <%= client_user.email %>
+            </td>      
+                      <td>
+              <%= client_user.password_digest %>
+            </td>      
+                    <td>
+          <%= link_to 'Mostrar', client_user, class:"btn btn-light min-width-btn" %>
+          <%= link_to 'Editar', edit_client_user_path(client_user),class:"btn btn-primary min-width-btn"  %>     
+          <%= link_to 'Deletar', client_user, method: :delete, data: { confirm: 'Tem certeza?' }, class:"btn btn-danger min-width-btn"%>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <br>
+  <%= link_to 'Novo Client User', new_client_user_path,class:"btn btn-success min-width-btn" %>
+</div>

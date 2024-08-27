@@ -5,6 +5,7 @@
       <tr>
         <th>Nome</th>
         <th>Descricao</th>
+        <th>Categoria</th>
         <th>Link</th>
         <th>Videos</th>
       <th></th>
@@ -18,7 +19,10 @@
             </td>      
             <td>
               <%= sales_course.descricao %>
-            </td>      
+            </td>  
+            <td>
+              <%= sales_course.admin_categories.nome %>
+            </td>    
             <td>
               <%= sales_course.link %>
             </td>      
