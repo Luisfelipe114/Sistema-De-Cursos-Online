@@ -25,6 +25,7 @@ class Sales::CoursesController < Sales::ApplicationController
 
     respond_to do |format|
       if @course.save
+        @course.picture.attach(params[:sales_course][:picture]) # active storage
         format.html { redirect_to sales_seller_courses_path(@seller), notice: "Course was successfully created." }
         format.json { render :show, status: :created, location: @course }
       else
@@ -38,6 +39,7 @@ class Sales::CoursesController < Sales::ApplicationController
   def update
     respond_to do |format|
       if @course.update(course_params)
+        @course.picture.attach(params[:picture])
         format.html { redirect_to sales_seller_courses_path(@seller), notice: "Course was successfully updated." }
         format.json { render :show, status: :ok, location: @course }
       else
@@ -66,6 +68,6 @@ class Sales::CoursesController < Sales::ApplicationController
     # Only allow a list of trusted parameters through.
     def course_params
       params[:sales_course][:sales_sellers_id] = params[:seller_id]
-      params.require(:sales_course).permit(:nome, :descricao, :link, :sales_sellers_id, :admin_categories_id)
+      params.require(:sales_course).permit(:nome, :descricao, :preco, :sales_sellers_id, :admin_categories_id, :picture)
     end
 end

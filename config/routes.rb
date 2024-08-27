@@ -3,6 +3,8 @@ Rails.application.routes.draw do
 
   namespace :marketplace do
     root to: 'home#index'
+    resources :courses, only: [:show] 
+    # get '/:course_id', to: 'home#'
   end
 
   namespace :client do

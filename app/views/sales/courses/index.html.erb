@@ -6,7 +6,7 @@
         <th>Nome</th>
         <th>Descricao</th>
         <th>Categoria</th>
-        <th>Link</th>
+        <th>Preço</th>
         <th>Videos</th>
       <th></th>
       </tr>
@@ -24,7 +24,7 @@
               <%= sales_course.admin_categories.nome %>
             </td>    
             <td>
-              <%= sales_course.link %>
+              <%= sales_course.preco %>
             </td>      
             <td>
               <%= link_to 'Acessar', sales_seller_course_videos_path(@seller, course_id: sales_course.id) %>
