@@ -20,7 +20,11 @@ gem 'htmlbeautifier'
 
 gem 'sassc-rails'
 
+gem 'jquery-rails'
+
 gem 'dotenv-rails', groups: [:development, :test]
+
+gem 'yt', '~> 0.32.0' # para integração com o youtube
 
 gem 'will_paginate' # para paginação
 

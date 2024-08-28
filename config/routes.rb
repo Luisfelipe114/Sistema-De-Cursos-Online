@@ -2,8 +2,10 @@ Rails.application.routes.draw do
   root to: 'home#index'
 
   namespace :marketplace do
+    # get 'checkout/index' => observaçãoo(QUERY PARAMS): o helper gerado disso seria marketplace_checkout_index_path. se eu quiser passar query params para a rota, eu chamaria ele marketplace_checkout_index_path(query_param: value, query_param2: value2, etc...)
     root to: 'home#index'
     resources :courses, only: [:show] 
+    get '/checkout/:course_id', to:'checkout#index', course_id: /\d+/, as: 'checkout'
     # get '/:course_id', to: 'home#'
   end
 
@@ -18,13 +20,19 @@ Rails.application.routes.draw do
   end
 
   namespace :sales do
+    get 'youtube/redirect'
     root to: 'home#index'
+    get 'home/index'
+
     get '/login', to: 'login#index'
     get '/signup', to: 'login#signup'
     post '/login/confirm', to: 'login#confirm_login', as: 'confirm_login'
     post '/signup/new-signup', to: 'login#create', as: 'new_signup'
     get '/logout', to: 'login#logout', as: 'logout'
-    get 'home/index'
+
+    get '/youtube-response', to: 'youtube#redirect'
+    post '/upload-video', to: 'youtube#upload'
+
     resources :sellers, except: [:index, :new] do
       resources :addresses
       resources :bank_accounts

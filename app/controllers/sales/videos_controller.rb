@@ -13,6 +13,7 @@ class Sales::VideosController < Sales::ApplicationController
 
   # GET /sales/videos/new
   def new
+    @youtube_access_token = params[:access_token]
     @video = Sales::Video.new
   end
 

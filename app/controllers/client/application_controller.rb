@@ -9,6 +9,6 @@ class Client::ApplicationController < ApplicationController
       return if @user.present?
     end
 
-    redirect_to clien, notice: 'Faça login para acessar esse recurso'
+    redirect_to client_login_path, notice: 'Faça login para acessar esse recurso'
   end
 end

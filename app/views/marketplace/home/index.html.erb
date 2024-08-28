@@ -31,7 +31,7 @@
               <p class="card-text"><strong>Categoria:</strong> <%= sales_course.admin_categories.nome %></p>
               <p class="card-text"><strong>Preço:</strong> <%= number_to_currency(sales_course.preco) %></p>
             </div>
-            <%= link_to "Comprar", marketplace_root_path, class: "btn btn-success m-2"%>
+            <%= link_to "Comprar", marketplace_checkout_path(course_id: sales_course.id), class: "btn btn-success m-2"%>
           </div>
         <% end %>
       </div>

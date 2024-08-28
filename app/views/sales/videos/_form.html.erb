@@ -1,3 +1,5 @@
+
+
 <%= form_with(model: @video, local: true, url: @video.new_record? ? sales_seller_course_videos_path(@seller, @course) : sales_seller_course_video_path(@seller, @course, @video)) do |form| %>
   <% if @video.errors.any? %>
     <div id="error_explanation" class="alert alert-danger" role="alert">
@@ -9,19 +11,107 @@
       </ul>
     </div>
   <% end %>
-            <div class="form-group">
-        <%= form.label :nome %>
-        <%= form.text_field :nome, id: :nome ,class:"form-control"%>
-      </div>
-                <div class="form-group">
-        <%= form.label :descricao %>
-        <%= form.text_area :descricao, id: :descricao ,class:"form-control"%>
-      </div>
-                <div class="form-group">
-        <%= form.label :link %>
-        <%= form.text_field :link, id: :link ,class:"form-control"%>
-      </div>
-        <div class="actions">
-    <%= form.submit "Salvar", class:"btn btn-success min-width-btn" %>
-  </div>
+
+  <% if @youtube_access_token %>
+    <div class="form-group">
+          <%= form.label :nome %>
+          <%= form.text_field :nome, id: :nome ,class:"form-control", required:true%>
+    </div>
+    <div class="form-group">
+          <%= form.label :descricao %>
+          <%= form.text_area :descricao, id: :descricao ,class:"form-control"%>
+    </div>
+    <div class="form-group">
+          <%= form.label :video %>
+          <%= file_field_tag :video, id: :video ,class:"form-control"%>
+    </div>
+     <div class="form-group mt-2">
+          <button type="button" class="btn btn-success" onclick="handleUpload()">
+            Upload
+          </button>
+    </div>
+    <div class="actions" style="display: none;">
+      <%= form.submit "Salvar", class:"btn btn-success min-width-btn" %>
+    </div>
+  <% else %>
+    <div>
+      <button type="button" class="btn btn-danger" onclick="oAuthYouTube()">
+        Autentique-se
+      </button>
+    </div>
+  <% end %>
+            
 <% end %>
+
+<script>
+  let video = null
+  document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById("video").addEventListener('change', function(e) {
+      try {
+        if (e.target.files[0]) {
+          video = e.target.files[0];
+          console.log(video)
+        }
+      } catch (error) {
+        console.log(error)
+      }
+    });
+  });
+
+  let access_token = "<%= @youtube_access_token %>"
+
+  function oAuthYouTube() {
+    let client_id = "<%= ENV['OAUTH_CLIENT_ID'] %>";
+    let redirect_uri = "<%= ENV['REDIRECT_URI'] %>";
+    let scope = ["https://www.googleapis.com/auth/youtube", "https://www.googleapis.com/auth/youtube.upload"];
+    let response_type = "token";
+
+    localStorage.setItem("@AppPlataformaCursos/redirect_route", window.location.href)
+
+    window.location.href = "https://accounts.google.com/o/oauth2/auth?client_id=" + client_id + "&redirect_uri=" + redirect_uri + "&scope=" + scope.join("%20") + "&response_type=" + response_type;
+  }
+
+  function handleUpload() {
+    let title = document.getElementById("nome").value;
+  
+    var data = new FormData();
+    data.append("token", access_token)
+    data.append("video", video)
+    data.append("title", title)
+
+    // console.log(access_token, video, title)
+
+    for (const [key, value] of data.entries()) {
+        console.log(`${key}:`, value);
+    }
+
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', '/sales/upload-video', true);
+
+    let csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+    xhr.setRequestHeader('X-CSRF-Token', csrfToken);
+
+    // Configura o tipo de resposta esperada
+    xhr.responseType = 'json';
+
+    // Define a função de callback para quando a solicitação for completada
+    xhr.onload = function() {
+      if (xhr.status >= 200 && xhr.status < 300) {
+        // Solicitação bem-sucedida
+        console.log(xhr.response);
+      } else {
+        // Solicitação falhou
+        console.error('Error:', xhr.statusText);
+      }
+    };
+
+    // Define a função de callback para quando ocorrer um erro
+    xhr.onerror = function() {
+      console.error('Network Error');
+    };
+
+    // Envia a solicitação
+    xhr.send(data);
+     
+  }
+</script>
