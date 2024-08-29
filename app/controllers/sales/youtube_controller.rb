@@ -6,9 +6,16 @@ class Sales::YoutubeController < Sales::ApplicationController
   end
 
   def upload
-    path = params[:video].path
-    debugger
-    response = uploadVideo(path: path, title: params[:title], token: params[:token])
-    render json: {embed: response }, status: :ok
+    begin
+      path = params[:video].path
+      response = uploadVideo(path: path, title: params[:title], token: params[:token])
+      debugger
+      
+      render json: { embed: response.embed_html }, status: :ok
+      return
+    rescue StandardError => e
+      puts e
+      flash[:error] = 'Ocorreu um erro ao fazer o upload do vídeo. Por favor, tente novamente.'
+    end
   end
 end

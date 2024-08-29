@@ -19,6 +19,7 @@ class Sales::VideosController < Sales::ApplicationController
 
   # GET /sales/videos/1/edit
   def edit
+    @youtube_access_token = params[:access_token]
   end
 
   # POST /sales/videos or /sales/videos.json
@@ -72,6 +73,6 @@ class Sales::VideosController < Sales::ApplicationController
     # Only allow a list of trusted parameters through.
     def video_params
       params[:sales_video][:sales_courses_id] = params[:course_id]
-      params.require(:sales_video).permit(:nome, :descricao, :link, :sales_courses_id)
+      params.require(:sales_video).permit(:nome, :descricao, :link, :sales_courses_id, :embed)
     end
 end

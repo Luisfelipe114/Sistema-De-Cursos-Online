@@ -16,6 +16,8 @@ Rails.application.routes.draw do
     post '/login/confirm', to: 'login#confirm_login', as: 'confirm_login'
     post '/signup/new-signup', to: 'login#create', as: 'new_signup'
     get '/logout', to: 'login#logout', as: 'logout'
+
+    get '/courses/:course_id', to: 'courses#show', course_id: /\d+/, as: 'show_course'
     root to: 'home#index'
   end
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_08_27_140748) do
+ActiveRecord::Schema[7.1].define(version: 2024_08_29_134841) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -68,6 +68,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_27_140748) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "client_users_courses", force: :cascade do |t|
+    t.bigint "client_users_id", null: false
+    t.bigint "sales_courses_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["client_users_id"], name: "index_client_users_courses_on_client_users_id"
+    t.index ["sales_courses_id"], name: "index_client_users_courses_on_sales_courses_id"
+  end
+
   create_table "sales_addresses", force: :cascade do |t|
     t.string "rua"
     t.string "numero"
@@ -119,11 +128,14 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_27_140748) do
     t.bigint "sales_courses_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "embed"
     t.index ["sales_courses_id"], name: "index_sales_videos_on_sales_courses_id"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "client_users_courses", "client_users", column: "client_users_id"
+  add_foreign_key "client_users_courses", "sales_courses", column: "sales_courses_id"
   add_foreign_key "sales_addresses", "sales_sellers", column: "sales_sellers_id"
   add_foreign_key "sales_bank_accounts", "sales_sellers", column: "sales_sellers_id"
   add_foreign_key "sales_courses", "admin_categories", column: "admin_categories_id"

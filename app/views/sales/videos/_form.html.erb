@@ -1,6 +1,6 @@
 
 
-<%= form_with(model: @video, local: true, url: @video.new_record? ? sales_seller_course_videos_path(@seller, @course) : sales_seller_course_video_path(@seller, @course, @video)) do |form| %>
+<%= form_with(model: @video, local: true, url: @video.new_record? ? sales_seller_course_videos_path(@seller, @course) : sales_seller_course_video_path(@seller, @course, @video), id: 'videoForm') do |form| %>
   <% if @video.errors.any? %>
     <div id="error_explanation" class="alert alert-danger" role="alert">
       <h5><%= pluralize(@video.errors.count, "error") %> prohibited this video from being saved:</h5>
@@ -26,9 +26,10 @@
           <%= file_field_tag :video, id: :video ,class:"form-control"%>
     </div>
      <div class="form-group mt-2">
-          <button type="button" class="btn btn-success" onclick="handleUpload()">
-            Upload
-          </button>
+         <button type="button" class="btn btn-success" id="uploadButton" onclick="handleUpload()">
+             <span id="uploadButtonText">Upload</span>
+             <span id="uploadSpinner" class="spinner-border spinner-border-sm me-2" style="display: none;" role="status" aria-hidden="true"></span>
+        </button>
     </div>
     <div class="actions" style="display: none;">
       <%= form.submit "Salvar", class:"btn btn-success min-width-btn" %>
@@ -71,47 +72,61 @@
     window.location.href = "https://accounts.google.com/o/oauth2/auth?client_id=" + client_id + "&redirect_uri=" + redirect_uri + "&scope=" + scope.join("%20") + "&response_type=" + response_type;
   }
 
-  function handleUpload() {
-    let title = document.getElementById("nome").value;
-  
-    var data = new FormData();
-    data.append("token", access_token)
-    data.append("video", video)
-    data.append("title", title)
+  async function handleUpload() {
+    let uploadButton = document.getElementById('uploadButton');
+    let uploadSpinner = document.getElementById('uploadSpinner');
+    const uploadButtonText = document.getElementById('uploadButtonText');
 
-    // console.log(access_token, video, title)
-
-    for (const [key, value] of data.entries()) {
-        console.log(`${key}:`, value);
+    if (uploadButton && uploadSpinner && uploadButtonText) {
+      uploadSpinner.style.display = 'inline-block';
+      uploadButtonText.innerText = 'Enviando...';
+      uploadButton.disabled = true;
     }
 
-    const xhr = new XMLHttpRequest();
-    xhr.open('POST', '/sales/upload-video', true);
+    let title = document.getElementById("nome").value;
+    let data = new FormData();
+    data.append("token", access_token);
+    data.append("video", video);
+    data.append("title", title);
 
-    let csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-    xhr.setRequestHeader('X-CSRF-Token', csrfToken);
+    try {
+      const response = await fetch('/sales/upload-video', {
+        method: 'POST',
+        body: data,
+        headers: {
+          'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+        }
+      });
 
-    // Configura o tipo de resposta esperada
-    xhr.responseType = 'json';
-
-    // Define a função de callback para quando a solicitação for completada
-    xhr.onload = function() {
-      if (xhr.status >= 200 && xhr.status < 300) {
-        // Solicitação bem-sucedida
-        console.log(xhr.response);
-      } else {
-        // Solicitação falhou
-        console.error('Error:', xhr.statusText);
+      if (!response.ok) {
+        throw new Error('Network response was not ok ' + response.statusText);
       }
-    };
 
-    // Define a função de callback para quando ocorrer um erro
-    xhr.onerror = function() {
-      console.error('Network Error');
-    };
+      const result = await response.json();
 
-    // Envia a solicitação
-    xhr.send(data);
-     
+      let input = document.createElement('input');
+      input.type = 'hidden';
+      input.name = 'sales_video[embed]';
+      input.value = result.embed;
+
+      document.getElementById('videoForm').appendChild(input);
+      document.getElementById('videoForm').submit();
+    } catch (error) {
+       window.location.reload();
+    } finally {
+      resetButton();
+    }
+  }
+
+  function resetButton() {
+    let uploadButton = document.getElementById('uploadButton');
+    let uploadSpinner = document.getElementById('uploadSpinner');
+    const uploadButtonText = document.getElementById('uploadButtonText');
+
+    if (uploadButton && uploadSpinner && uploadButtonText) {
+      uploadSpinner.style.display = 'none';
+      uploadButtonText.innerText = 'Upload';  // Volta ao texto original
+      uploadButton.disabled = false;
+    }
   }
 </script>

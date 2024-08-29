@@ -1,4 +1,4 @@
-class Marketplace::CoursesController < ApplicationController
+class Marketplace::CoursesController < Marketplace::ApplicationController
   before_action :set_course, only: :show
 
   def show
