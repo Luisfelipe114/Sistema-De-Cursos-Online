@@ -17,7 +17,7 @@ Rails.application.routes.draw do
     post '/signup/new-signup', to: 'login#create', as: 'new_signup'
     get '/logout', to: 'login#logout', as: 'logout'
 
-    get '/courses/:course_id', to: 'courses#show', course_id: /\d+/, as: 'show_course'
+    get '/courses/:course_id/videos/:video_id', to: 'courses#show', course_id: /\d+/, video_id:  /\d+/, as: 'show_course'
     root to: 'home#index'
   end
 

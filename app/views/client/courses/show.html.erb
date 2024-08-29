@@ -1,4 +1,27 @@
-<h1>Client::Courses#show</h1>
-<p>Find me in app/views/client/courses/show.html.erb</p>
+<div class="container">
+  <h1><%= @course.nome %></h1>
+  <div class="row mt-3">
+    <!-- Exibição do vídeo atual -->
+    <div class="col-md-8">
+      <% if @current_video.present? %>
+        <div class="embed-responsive embed-responsive-16by9">
+          <%= @current_video.embed.html_safe %>
+        </div>
+      <% else %>
+        <p>Selecione um vídeo para assistir.</p>
+      <% end %>
+    </div>
 
-<%= @course.inspect %>
+    <!-- Lista de vídeos do curso -->
+    <div class="col-md-4">
+      <h3>Vídeos do Curso</h3>
+      <ul class="list-group">
+        <% @videos.each do |video| %>
+          <li class="list-group-item">
+            <%= link_to video.nome, client_show_course_path(@course, video_id: video.id ), class: "btn btn-link" %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</div>

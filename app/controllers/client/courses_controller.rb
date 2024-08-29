@@ -1,6 +1,8 @@
 class Client::CoursesController < Client::ApplicationController
   before_action :set_client_course, only: [:show]
   def show
+    @videos = Sales::Video.where(sales_courses_id: @course.id)
+    @current_video = @videos.find(params[:video_id]) if params[:video_id].present?
   end
 
   private 
