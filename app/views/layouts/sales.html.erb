@@ -14,7 +14,9 @@
   <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-3" aria-label="Fifth navbar example">
       <div class="container-fluid">
-         <%= link_to 'EducaPlay', root_path, class: 'navbar-brand' %>
+        <%= link_to root_path do %>
+            <%= image_tag 'logo-v2.svg', alt: 'EducaPlay Logo', class: 'navbar-logo logo-svg' %>
+        <% end %>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample05" aria-controls="navbarsExample05" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>

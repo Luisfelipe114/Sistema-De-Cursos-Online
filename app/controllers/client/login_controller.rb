@@ -3,6 +3,12 @@ class Client::LoginController < ApplicationController
 
   layout 'login'
   def index
+    # if session[:user].present?
+    #   @user = Client::User.find(session[:user])
+    #   if @user.present?
+    #     redirect_to client_root_path
+    #   end
+    # end
   end
 
   def confirm_login

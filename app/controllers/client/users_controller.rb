@@ -1,14 +1,5 @@
-class Client::UsersController < ApplicationController
+class Client::UsersController < Client::ApplicationController
   before_action :set_client_user, only: %i[ show edit update destroy ]
-
-  # GET /client/users or /client/users.json
-  def index
-    @client_users = Client::User.all
-  end
-
-  # GET /client/users/1 or /client/users/1.json
-  def show
-  end
 
   # GET /client/users/new
   def new
@@ -38,7 +29,7 @@ class Client::UsersController < ApplicationController
   def update
     respond_to do |format|
       if @client_user.update(client_user_params)
-        format.html { redirect_to client_user_url(@client_user), notice: "User was successfully updated." }
+        format.html { redirect_to client_root_path, notice: "User was successfully updated." }
         format.json { render :show, status: :ok, location: @client_user }
       else
         format.html { render :edit, status: :unprocessable_entity }

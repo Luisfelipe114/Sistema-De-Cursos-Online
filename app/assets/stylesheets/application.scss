@@ -15,3 +15,12 @@
  */
 
  @import 'bootstrap';
+
+ .navbar-logo {
+    height: 50px; /* Ajuste o tamanho conforme necessário */
+    width: auto; /* Mantém a proporção da imagem */
+  }
+
+  .logo-svg {
+    filter: invert(93%) sepia(7%) saturate(30%) hue-rotate(334deg) brightness(106%) contrast(107%);
+  }

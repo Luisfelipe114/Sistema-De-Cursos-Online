@@ -17,11 +17,7 @@
           <%= form.label :email %>
           <%= form.text_field :email, id: :email ,class:"form-control", readonly:true%>
         </div>
-                        <div class="form-group">
-          <%= form.label :password_digest %>
-          <%= form.text_field :password_digest, id: :password_digest ,class:"form-control", readonly:true%>
-        </div>
             <% end %>
   <%= link_to 'Editar', edit_client_user_path(@client_user),class:"btn btn-primary min-width-btn" %> 
-  <%= link_to 'Voltar', client_users_path,class:"btn btn-light min-width-btn" %>
+ <%= link_to 'Voltar', client_root_path, class:"btn btn-light min-width-btn" %>
 </div>
