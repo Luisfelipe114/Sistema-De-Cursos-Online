@@ -39,7 +39,7 @@ class Sales::CoursesController < Sales::ApplicationController
   def update
     respond_to do |format|
       if @course.update(course_params)
-        @course.picture.attach(params[:picture])
+        @course.picture.attach(params[:sales_course][:picture])
         format.html { redirect_to sales_seller_courses_path(@seller), notice: "Course was successfully updated." }
         format.json { render :show, status: :ok, location: @course }
       else

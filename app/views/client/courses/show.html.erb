@@ -1,27 +1,44 @@
+<style>
+  .btn-custom:hover, .btn-custom.active {
+    background-color: #e2e6ea;
+    color: #333; 
+    text-decoration: none; 
+    border-color: #e2e6ea;
+  }
+
+  .btn {
+    border-radius: 0;
+  }
+</style>
+
 <div class="container">
   <h1><%= @course.nome %></h1>
   <div class="row mt-3">
+    <hr>
     <!-- Exibição do vídeo atual -->
     <div class="col-md-8">
       <% if @current_video.present? %>
-        <div class="embed-responsive embed-responsive-16by9">
-          <%= @current_video.embed.html_safe %>
+        <div style="position: relative; width: 100%; height: 0; padding-bottom: 56.25%;">
+          <iframe src="<%= @current_video.link %>" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" frameborder="0" allowfullscreen></iframe>
         </div>
       <% else %>
         <p>Selecione um vídeo para assistir.</p>
       <% end %>
+      <hr>
+      <div>
+        <%= @current_video.descricao %>
+      </div>
     </div>
 
     <!-- Lista de vídeos do curso -->
     <div class="col-md-4">
-      <h3>Vídeos do Curso</h3>
       <ul class="list-group">
-        <% @videos.each do |video| %>
-          <li class="list-group-item">
-            <%= link_to video.nome, client_show_course_path(@course, video_id: video.id ), class: "btn btn-link" %>
+        <li class="list-group-item" style="font-weight: bold; font-size: 1.1em">Aulas</li>
+        <% @videos.each_with_index do |video, index| %> <!--for each com contador-->
+          <li class="list-group-item" style="padding: 0;">
+            <%= link_to "#{format('%02d', index + 1)} - #{video.nome}", client_show_course_path(@course, video_id: video.id), class: "btn btn-custom #{'active' if video.id == @current_video.id}", style:"width: 100%; text-align: left; padding: 0.8em 0.5em 0.8em 1.5em;" %>
           </li>
         <% end %>
       </ul>
     </div>
-  </div>
 </div>

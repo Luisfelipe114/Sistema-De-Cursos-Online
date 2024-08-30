@@ -2,7 +2,8 @@ class Client::LoginController < ApplicationController
   # skip_before_action :authorize
 
   layout 'login'
-  def index; end
+  def index
+  end
 
   def confirm_login
     user = Client::User.find_by(email: params[:email])

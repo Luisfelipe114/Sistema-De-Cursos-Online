@@ -106,8 +106,8 @@
 
       let input = document.createElement('input');
       input.type = 'hidden';
-      input.name = 'sales_video[embed]';
-      input.value = result.embed;
+      input.name = 'sales_video[link]';
+      input.value = result.embed.match(/src="([^"]*)"/)[1];
 
       document.getElementById('videoForm').appendChild(input);
       document.getElementById('videoForm').submit();
