@@ -5,6 +5,7 @@ class Client::ApplicationController < ApplicationController
 
   def authorize
     if session[:user].present?
+
       @user = Client::User.find(session[:user])
       return if @user.present?
     end

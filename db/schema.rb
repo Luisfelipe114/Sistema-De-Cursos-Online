@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_08_29_134841) do
+ActiveRecord::Schema[7.1].define(version: 2024_09_02_121328) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -50,12 +50,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_29_134841) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "password_digest"
+    t.index ["cpf"], name: "index_admin_administrators_on_cpf", unique: true
+    t.index ["email"], name: "index_admin_administrators_on_email", unique: true
   end
 
   create_table "admin_categories", force: :cascade do |t|
     t.string "nome"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["nome"], name: "index_admin_categories_on_nome", unique: true
   end
 
   create_table "client_users", force: :cascade do |t|
@@ -66,6 +69,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_29_134841) do
     t.string "password_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["cpf"], name: "index_client_users_on_cpf", unique: true
+    t.index ["email"], name: "index_client_users_on_email", unique: true
   end
 
   create_table "client_users_courses", force: :cascade do |t|
@@ -86,6 +91,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_29_134841) do
     t.bigint "sales_sellers_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["numero", "cep"], name: "index_sales_addresses_on_numero_and_cep", unique: true
     t.index ["sales_sellers_id"], name: "index_sales_addresses_on_sales_sellers_id"
   end
 

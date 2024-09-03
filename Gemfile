@@ -22,6 +22,10 @@ gem 'sassc-rails'
 
 gem 'jquery-rails'
 
+gem 'jquery-ui-rails'
+
+gem 'jquery-inputmask-rails'
+
 gem 'dotenv-rails', groups: [:development, :test]
 
 gem 'yt', '~> 0.32.0' # para integração com o youtube

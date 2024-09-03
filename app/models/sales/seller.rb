@@ -7,6 +7,9 @@ class Sales::Seller < ApplicationRecord
   has_many :sales_bank_accounts, class_name: 'Sales::BankAccount', foreign_key: 'sales_sellers_id'
   has_many :sales_courses, class_name: 'Sales::Course', foreign_key: 'sales_sellers_id'
 
+  validates :nome, :email, presence: true
+  validates_uniqueness_of :email, :cpf
+
   validates :password, presence: true, if: :password_required?
 
 

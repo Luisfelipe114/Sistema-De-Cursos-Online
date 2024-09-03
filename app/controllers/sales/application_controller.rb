@@ -5,6 +5,7 @@ class Sales::ApplicationController < ApplicationController
 
   def authorize
     if session[:seller].present?
+      
       @seller = Sales::Seller.find(session[:seller])
       return if @seller.present?
     end

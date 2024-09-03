@@ -9,6 +9,8 @@ class Client::User < ApplicationRecord
   has_secure_password # pega o campo password e salva como um password digest
 
   validates :password, presence: true, if: :password_required?
+  validates_presence_of :nome, :cpf, :email
+  validates_uniqueness_of :cpf, :email
 
   def password_required?
     new_record? || !password.nil?

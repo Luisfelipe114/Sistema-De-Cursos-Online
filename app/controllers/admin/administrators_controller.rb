@@ -1,5 +1,5 @@
 class Admin::AdministratorsController < Admin::ApplicationController
-  before_action :set_admin_administrator, :set_admin_address, only: %i[ show edit update destroy ]
+  before_action :set_admin_administrator,  only: %i[ show edit update destroy ]
 
 
   # GET /admin/administrators or /admin/administrators.json
@@ -62,10 +62,6 @@ class Admin::AdministratorsController < Admin::ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_admin_administrator
       @admin_administrator = Admin::Administrator.find(params[:id])
-    end
-
-    def set_admin_address
-      @address = @admin_administrator.admin_addresses.first
     end
 
     # Only allow a list of trusted parameters through.
